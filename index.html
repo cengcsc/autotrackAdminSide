@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Doggo Fee Checker</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      overflow: hidden;
+      font-family: 'Segoe UI', Tahoma, sans-serif;
+    }
+
+    #loader {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: #ffffff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      z-index: 9999;
+    }
+
+    #loader img {
+      width: 150px;
+      height: auto;
+    }
+
+    #loader p {
+      margin-top: 20px;
+      font-size: 18px;
+      color: #444;
+      max-width: 80%;
+    }
+
+    #dog-quote {
+      margin-top: 10px;
+      font-size: 16px;
+      color: #777;
+      font-style: italic;
+    }
+
+    iframe {
+      display: none;
+      width: 100vw;
+      height: 100vh;
+      border: none;
+    }
+  </style>
+</head>
+<body>
+  <div id="loader">
+    <img src="https://cdn.dribbble.com/userupload/24885365/file/original-07388c6641e76eef3ec0fb8ecf9cc446.gif" alt="Loading..." />
+    <p id="loadingText">Sniffing out your request... 🐶</p>
+    <p id="dog-quote">Good things come to those who fetch.</p>
+  </div>
+
+  <iframe
+    id="contentFrame"
+    src="https://script.google.com/macros/s/AKfycbxX2L93vVM4DEw6z_QA7erBuJk3vJg68RPkm52oLatN6ZDk8xMWizFTqb9rlyESSRNbOQ/exec"
+    allowfullscreen>
+  </iframe>
+
+  <script>
+    const dogQuotes = [
+      "Sniffing out your request",
+      "Chasing the data tail",
+      "Marking our territory on the server",
+      "Just pawsing for a moment",
+      "Fetching results, stay",
+      "Barking up the right tree",
+      "Drooling over your data",
+      "Sniff sniff... almost there",
+      "Unleashing your request",
+      "Hold tight, pupper’s on the job"
+    ];
+
+    const dogEmojis = [
+      "🐶", "🐾", "🦴", "🐕", "🐩", "🦮", "🚀", "🎾", "🥎", "🛁"
+    ];
+
+    const motivationQuotes = [
+      "Good things come to those who fetch.",
+      "Keep going, you're pawsome!",
+      "Stay strong, tail-wagger!",
+      "You're barking up the right tree!",
+      "Sit. Stay. Load. Win!",
+      "Almost there, superstar pup!",
+      "Dig deep, greatness is loading.",
+      "Every pup has its day!",
+      "You're not lost — you're exploring!",
+      "Be the good doggo you are 🐾"
+    ];
+
+    // Randomize quote and emoji
+    const randomQuote = dogQuotes[Math.floor(Math.random() * dogQuotes.length)];
+    const randomEmoji = dogEmojis[Math.floor(Math.random() * dogEmojis.length)];
+    const randomMotivation = motivationQuotes[Math.floor(Math.random() * motivationQuotes.length)];
+
+    document.getElementById("loadingText").textContent = `${randomQuote}... ${randomEmoji}`;
+    document.getElementById("dog-quote").textContent = randomMotivation;
+
+    // Show iframe after random delay between 2–5s
+    const iframe = document.getElementById("contentFrame");
+    let iframeLoaded = false;
+    let delayPassed = false;
+
+    const delay = Math.floor(Math.random() * 3000) + 2000; // 2000–5000ms
+    setTimeout(() => {
+      delayPassed = true;
+      if (iframeLoaded) showIframe();
+    }, delay);
+
+    iframe.onload = () => {
+      iframeLoaded = true;
+      if (delayPassed) showIframe();
+    };
+
+    function showIframe() {
+      document.getElementById("loader").style.display = "none";
+      iframe.style.display = "block";
+    }
+  </script>
+</body>
+</html>
